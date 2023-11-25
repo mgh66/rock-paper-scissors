@@ -3,21 +3,18 @@ function getComputerChoice() {
     function computerChoice() {
     return Math.floor(Math.random()*3);
     }
-    function getComputerSelection(){
-        switch (computerChoice()) {
-            case 0:
-                return 'Rock';
-                break;
-            case 1:
-                return 'Paper';
-                break;
-            case 2:
-                return 'Scissors'        
-        }
+    switch (computerChoice()) {
+        case 0:
+            return 'Rock';
+            break;
+        case 1:
+            return 'Paper';
+            break;
+        case 2:
+            return 'Scissors'        
     }
-    return getComputerSelection();
 }
-const computerSelection = getComputerChoice();
+
 // The section related to player selection
 function getPlayerChoice() {
     function playerChoice() {
@@ -30,13 +27,46 @@ function getPlayerChoice() {
     ||getPlayerSelection==='Scissors') {
         return getPlayerSelection;
     }
-alert `Please choose between rock, paper and scissors.`
+return `Please choose between rock, paper and scissors.`
 }
-const PlayerSelection = getPlayerChoice();
-
-
-
-
-
-
-
+let playerSelection;
+let computerSelection;
+//The section related to the execution of each round of the game
+let playerScore = 0;
+let computerScore = 0;
+function playRound(playerSelection, computerSelection) {
+    playerSelection = getPlayerChoice()
+    computerSelection = getComputerChoice();
+    if (playerSelection==='Rock'&&computerSelection==='Scissors') {
+        console.log(`You Win! Rock beats Scissors.
+        You're score: ${++playerScore}
+        computer score: ${computerScore}`);
+    } else if (playerSelection==='Scissors'&&computerSelection==='Paper') {
+        console.log (`You Win! Scissors beats Paper.
+        You're score: ${++playerScore}
+        computer score: ${computerScore}`);
+    } else if (playerSelection==='Paper'&&computerSelection==='Rock') {
+        console.log(`You Win! Paper beats Rock.
+        You're score: ${++playerScore}
+        computer score: ${computerScore}`);
+    } else if (computerSelection==='Rock'&&playerSelection==='Scissors') {
+        console.log(`You Lose! Rock beats Scissors.
+        You're score: ${playerScore}
+        computer score: ${++computerScore}`);
+    } else if (computerSelection==='Scissors'&&playerSelection==='Paper') {
+        console.log(`You Lose! Scissors beats Paper.
+        You're score: ${playerScore}
+        computer score: ${++computerScore}`);
+    } else if (computerSelection==='Paper'&&playerSelection==='Rock') {
+        console.log (`You Lose! Paper beats Rock.
+        You're score: ${playerScore}
+        computer score: ${++computerScore}`);
+    } else if (playerSelection===computerSelection) {
+        console.log(`This round was tied. You choose ${playerSelection} and Computer choose ${computerSelection}.
+        You're score: ${playerScore}
+        computer score: ${computerScore}`);
+        return playRound(playerSelection, computerSelection);
+    } else {
+        console.log(`The game does not run.`);
+    }
+}
